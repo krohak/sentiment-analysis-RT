@@ -8,92 +8,12 @@ print ('Loaded the word vectors!')
 
 
 import tensorflow as tf
-maxSeqLength = 10 #Maximum length of sentence
+
+
+maxSeqLength = 750
 numDimensions = 300 #Dimensions for each word vector
-firstSentence = np.zeros((maxSeqLength), dtype='int32')
-firstSentence[0] = wordsList.index("i")
-firstSentence[1] = wordsList.index("thought")
-firstSentence[2] = wordsList.index("the")
-firstSentence[3] = wordsList.index("movie")
-firstSentence[4] = wordsList.index("was")
-firstSentence[5] = wordsList.index("incredible")
-firstSentence[6] = wordsList.index("and")
-firstSentence[7] = wordsList.index("inspiring")
-#firstSentence[8] and firstSentence[9] are going to be 0
-print(firstSentence.shape)
-print(firstSentence) #Shows the row index for each word
 
-
-with tf.Session() as sess:
-    print(tf.nn.embedding_lookup(wordVectors,firstSentence).eval().shape)
-    
-
-from os import listdir
-from os.path import isfile, join
-import io
-positiveFiles = ['positiveReviews/' + f for f in listdir('positiveReviews/') if isfile(join('positiveReviews/', f))]
-negativeFiles = ['negativeReviews/' + f for f in listdir('negativeReviews/') if isfile(join('negativeReviews/', f))]
-numWords = []
-for pf in positiveFiles:
-    with io.open(pf, "r", encoding='utf-8') as f:
-        line=f.readline()
-        counter = len(line.split())
-        numWords.append(counter)       
-print('Positive files finished')
-
-for nf in negativeFiles:
-    with io.open(nf, "r", encoding='utf-8') as f:
-        line=f.readline()
-        counter = len(line.split())
-        numWords.append(counter)  
-print('Negative files finished')
-
-numFiles = len(numWords)
-print('The total number of files is', numFiles)
-print('The total number of words in the files is', sum(numWords))
-print('The average number of words in the files is', sum(numWords)/len(numWords))
-
-
-
-maxSeqLength = 250
-
-
-fname = positiveFiles[3] #Can use any valid index (not just 3)
-with open(fname) as f:
-    for lines in f:
-        print(lines)
-        exit
-        
-        
-
-# Removes punctuation, parentheses, question marks, etc., and leaves only alphanumeric characters
-import re
-strip_special_chars = re.compile("[^A-Za-z0-9 ]+")
-
-def cleanSentences(string):
-    string = string.lower().replace("<br />", " ")
-    return re.sub(strip_special_chars, "", string.lower())
-
-
-
-firstFile = np.zeros((maxSeqLength), dtype='int32')
-with open(fname) as f:
-    indexCounter = 0
-    line=f.readline()
-    cleanedLine = cleanSentences(line)
-    split = cleanedLine.split()
-    for word in split:
-        if indexCounter < maxSeqLength:
-            try:
-                firstFile[indexCounter] = wordsList.index(word)
-            except ValueError:
-                firstFile[indexCounter] = 399999 #Vector for unknown words
-        indexCounter = indexCounter + 1
-firstFile
-
-
-
-ids = np.load('idsMatrix.npy')
+ids = np.load('idsMatrix2.npy')
 
 
 
@@ -106,7 +26,7 @@ def getTrainBatch():
     labels = []
     arr = np.zeros([batchSize, maxSeqLength])
     for i in range(batchSize):
-        if (i % 2 == 0): 
+        if (i % 2 == 0):
             num = randint(1,11499)
             labels.append([1,0])
         else:
@@ -183,7 +103,9 @@ tf.summary.scalar('Loss', loss)
 tf.summary.scalar('Accuracy', accuracy)
 merged = tf.summary.merge_all()
 logdir = "tensorboard/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S") + "/"
-writer = tf.summary.FileWriter(logdir, sess.graph)
+
+with tf.Session() as sess:
+    writer = tf.summary.FileWriter(logdir, sess.graph)
 
 
 

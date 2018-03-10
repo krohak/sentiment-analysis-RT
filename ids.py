@@ -1,4 +1,8 @@
 import numpy as np
+# We make use of GloVe, which converts words into vector data,
+# https://nlp.stanford.edu/projects/glove/
+# using the Wikipedia dataset with 50 dimensional embedding.
+# https://www.damienpontifex.com/2017/10/27/using-pre-trained-glove-embeddings-in-tensorflow/
 wordsList = np.load('wordsList.npy')
 print('Loaded the word list!')
 wordsList = wordsList.tolist() #Originally loaded as numpy array
@@ -21,7 +25,7 @@ for pf in positiveFiles:
         counter = 0
         for line in lines:
             counter += len(line.split())
-        numWords.append(counter)   
+        numWords.append(counter)
 print('Positive files finished')
 
 for nf in negativeFiles:
@@ -30,7 +34,7 @@ for nf in negativeFiles:
         counter = 0
         for line in lines:
             counter += len(line.split())
-        numWords.append(counter)   
+        numWords.append(counter)
 print('Negative files finished')
 
 numFiles = len(numWords)
@@ -98,7 +102,7 @@ for pf in positiveFiles:
                     break
             if indexCounter >= maxSeqLength:
                     break
-        fileCounter = fileCounter + 1 
+        fileCounter = fileCounter + 1
 
 for nf in negativeFiles:
     with open(nf, "r") as f:
@@ -117,8 +121,6 @@ for nf in negativeFiles:
                     break
             if indexCounter >= maxSeqLength:
                     break
-        fileCounter = fileCounter + 1 
+        fileCounter = fileCounter + 1
 
 np.save('idsMatrix2', ids)
-
-
