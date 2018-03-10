@@ -11,8 +11,8 @@ print ('Loaded the word vectors!')
 from os import listdir
 from os.path import isfile, join
 
-positiveFiles = ['pos/' + f for f in listdir('pos/') if isfile(join('pos/', f))]
-negativeFiles = ['neg/' + f for f in listdir('neg/') if isfile(join('neg/', f))]
+positiveFiles = ['txt_sentoken/pos/' + f for f in listdir('txt_sentoken/pos/') if isfile(join('txt_sentoken/pos/', f))]
+negativeFiles = ['txt_sentoken/neg/' + f for f in listdir('txt_sentoken/neg/') if isfile(join('txt_sentoken/neg/', f))]
 print(positiveFiles[0])
 numWords = []
 for pf in positiveFiles:
@@ -120,4 +120,5 @@ for nf in negativeFiles:
         fileCounter = fileCounter + 1 
 
 np.save('idsMatrix2', ids)
+
 
