@@ -1,0 +1,123 @@
+import numpy as np
+wordsList = np.load('wordsList.npy')
+print('Loaded the word list!')
+wordsList = wordsList.tolist() #Originally loaded as numpy array
+wordsList = [word.decode('UTF-8') for word in wordsList] #Encode words as UTF-8
+wordVectors = np.load('wordVectors.npy')
+print ('Loaded the word vectors!')
+
+####################################
+
+from os import listdir
+from os.path import isfile, join
+
+positiveFiles = ['pos/' + f for f in listdir('pos/') if isfile(join('pos/', f))]
+negativeFiles = ['neg/' + f for f in listdir('neg/') if isfile(join('neg/', f))]
+print(positiveFiles[0])
+numWords = []
+for pf in positiveFiles:
+    with open(pf, "r", encoding='utf-8') as f:
+        lines=f.readlines()
+        counter = 0
+        for line in lines:
+            counter += len(line.split())
+        numWords.append(counter)   
+print('Positive files finished')
+
+for nf in negativeFiles:
+    with open(nf, "r", encoding='utf-8') as f:
+        lines=f.readlines()
+        counter = 0
+        for line in lines:
+            counter += len(line.split())
+        numWords.append(counter)   
+print('Negative files finished')
+
+numFiles = len(numWords)
+print('The total number of files is', numFiles)
+print('The total number of words in the files is', sum(numWords))
+print('The average number of words in the files is', sum(numWords)/len(numWords))
+
+
+maxSeqLength = 750
+
+
+fname = positiveFiles[740]
+
+# Removes punctuation, parentheses, question marks, etc., and leaves only alphanumeric characters
+import re
+strip_special_chars = re.compile("[^A-Za-z0-9 ]+")
+
+def cleanSentences(string):
+    string = string.lower().replace("<br />", " ")
+    return re.sub(strip_special_chars, "", string.lower())
+
+#################
+
+firstFile = np.zeros((maxSeqLength), dtype='int32')
+with open(fname) as f:
+    indexCounter = 0
+    lines=f.readlines()
+    for line in lines:
+        cleanedLine = cleanSentences(line)
+        split = cleanedLine.split()
+        for word in split:
+            if indexCounter < maxSeqLength:
+                try:
+                    firstFile[indexCounter] = wordsList.index(word)
+                except ValueError:
+                    firstFile[indexCounter] = 399999 #Vector for unknown words
+            indexCounter = indexCounter + 1
+
+print(firstFile)
+print(indexCounter)
+
+
+
+######################################
+
+ids = np.zeros((numFiles, maxSeqLength), dtype='int32')
+
+fileCounter = 0
+
+for pf in positiveFiles:
+    with open(pf, "r") as f:
+        indexCounter = 0
+        lines=f.readlines()
+        for line in lines:
+            cleanedLine = cleanSentences(line)
+            split = cleanedLine.split()
+            for word in split:
+                try:
+                    ids[fileCounter][indexCounter] = wordsList.index(word)
+                except ValueError:
+                    ids[fileCounter][indexCounter] = 399999 #Vector for unkown words
+                print(fileCounter,indexCounter)
+                indexCounter = indexCounter + 1
+                if indexCounter >= maxSeqLength:
+                    break
+            if indexCounter >= maxSeqLength:
+                    break
+        fileCounter = fileCounter + 1 
+
+for nf in negativeFiles:
+    with open(nf, "r") as f:
+        indexCounter = 0
+        lines=f.readlines()
+        for line in lines:
+            cleanedLine = cleanSentences(line)
+            split = cleanedLine.split()
+            for word in split:
+                try:
+                    ids[fileCounter][indexCounter] = wordsList.index(word)
+                except ValueError:
+                    ids[fileCounter][indexCounter] = 399999 #Vector for unkown words
+                indexCounter = indexCounter + 1
+                if indexCounter >= maxSeqLength:
+                    break
+            if indexCounter >= maxSeqLength:
+                    break
+        fileCounter = fileCounter + 1 
+
+np.save('idsMatrix2', ids)
+
