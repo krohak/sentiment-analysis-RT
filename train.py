@@ -112,7 +112,7 @@ with tf.Session() as sess:
 
 
 
-
+'''
 sess = tf.InteractiveSession()
 saver = tf.train.Saver()
 sess.run(tf.global_variables_initializer())
@@ -128,11 +128,11 @@ for i in range(iterations):
         writer.add_summary(summary, i)
 
     #Save the network every 10,000 training iterations
-    if (i % 10000 == 0 and i != 0):
+    if (i % 1000 == 0):
         save_path = saver.save(sess, "models/pretrained_lstm.ckpt", global_step=i)
         print("saved to %s" % save_path)
 writer.close()
-
+'''
 
 
 
@@ -143,7 +143,7 @@ saver = tf.train.Saver()
 #saver.restore(sess, tf.train.latest_checkpoint('models'))
 #saver.restore(sess, save_path)
 
-saver = tf.train.import_meta_graph('models/pretrained_lstm.ckpt-40000.meta')
+saver = tf.train.import_meta_graph('models/pretrained_lstm.ckpt-78000.meta')
 saver.restore(sess,tf.train.latest_checkpoint('models'))
 
 # https://stackoverflow.com/questions/33759623/tensorflow-how-to-save-restore-a-model
