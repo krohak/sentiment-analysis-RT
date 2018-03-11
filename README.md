@@ -13,7 +13,7 @@ The dataset contains 1000 positive and 1000 negative movie reviews. The LSTM bas
 
 ## Explanation
 
-`jupyter notebook` which launches the Sentiment-Analysis-Rotten-Tomatoes notebook with explained code.
+- `jupyter notebook` which launches the Sentiment-Analysis-Rotten-Tomatoes notebook with explained code.
 
 ## Run
 
