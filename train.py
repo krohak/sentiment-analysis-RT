@@ -10,11 +10,11 @@ print ('Loaded the word vectors!')
 import tensorflow as tf
 
 
-maxSeqLength = 250 #750
-numDimensions = 50 #Dimensions for each word vector
+maxSeqLength = 750
+numDimensions = 300 #Dimensions for each word vector
 
 ids = np.load('idsMatrix2.npy')
-ids = ids[:,:250]
+#ids = ids[:,:250]
 
 
 
@@ -52,7 +52,7 @@ def getTestBatch():
 
 
 
-batchSize = 2
+batchSize = 24
 lstmUnits = 64
 numClasses = 2
 iterations = 100000
