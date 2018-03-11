@@ -7,3 +7,4 @@ tb.tar.gz
 op.txt
 models2.tar.gz
 .ipynb_checkpoints
+*.ipynb
