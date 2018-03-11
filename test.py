@@ -67,7 +67,7 @@ def getSentenceMatrix(sentence):
 
 
 
-inputText = "That movie was terrible. bad,deplorable,yuck,negative"
+inputText = "Nine minutes of psychedelic, pulsating, often symmetric abstract images, are enough to drive anyone crazy. I did spot a full-frame eye at the start, and later some birds silhouetted against other colors. It was just not my cup of tea. It's about 8 minutes too long."
 inputMatrix = getSentenceMatrix(inputText)
 
 
@@ -82,7 +82,8 @@ else:
     print("Negative Sentiment")
 
 
-secondInputText = "That movie was the best one I have ever seen."
+#secondInputText = "That movie was the best one I have ever seen."
+secondInputText = "Nine minutes of psychedelic, pulsating, often symmetric abstract images, are enough to drive anyone crazy. I did spot a full-frame eye at the start, and later some birds silhouetted against other colors. It was just not my cup of tea. It's about 8 minutes too long."
 secondInputMatrix = getSentenceMatrix(secondInputText)
 
 
