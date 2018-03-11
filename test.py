@@ -1,6 +1,6 @@
-numDimensions = 300
-maxSeqLength = 750
-batchSize = 24
+numDimensions = 50
+maxSeqLength = 250
+batchSize = 2
 lstmUnits = 64
 numClasses = 2
 iterations = 100000
@@ -41,7 +41,7 @@ sess = tf.InteractiveSession()
 saver = tf.train.Saver()
 
 #saver.restore(sess, tf.train.latest_checkpoint('models'))
-saver = tf.train.import_meta_graph('models/pretrained_lstm.ckpt-60000.meta')
+saver = tf.train.import_meta_graph('models/pretrained_lstm.ckpt-77000.meta')
 saver.restore(sess,tf.train.latest_checkpoint('models'))
 
 
@@ -82,7 +82,7 @@ else:
     print("Negative Sentiment")
 
 
-secondInputText = "That movie was the best one I have ever seen."
+secondInputText = "best movie ever excellent"
 secondInputMatrix = getSentenceMatrix(secondInputText)
 
 
