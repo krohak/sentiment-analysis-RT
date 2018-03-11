@@ -1,8 +1,8 @@
 import numpy as np
 wordsList = np.load('wordsList.npy')
 print('Loaded the word list!')
-wordsList = wordsList.tolist() #Originally loaded as numpy array
-wordsList = [word.decode('UTF-8') for word in wordsList] #Encode words as UTF-8
+wordsList = wordsList.tolist()
+wordsList = [word.decode('UTF-8') for word in wordsList]
 wordVectors = np.load('wordVectors.npy')
 print ('Loaded the word vectors!')
 
@@ -11,13 +11,9 @@ import tensorflow as tf
 
 
 maxSeqLength = 750
-numDimensions = 300 #Dimensions for each word vector
+numDimensions = 300
 
 ids = np.load('idsMatrix2.npy')
-#ids = ids[:,:250]
-
-
-
 
 
 from random import randint
@@ -46,8 +42,6 @@ def getTestBatch():
             labels.append([0,1])
         arr[i] = ids[num-1:num]
     return arr, labels
-
-
 
 
 
@@ -111,7 +105,7 @@ with tf.Session() as sess:
 
 
 
-
+# uncomment to train
 '''
 sess = tf.InteractiveSession()
 saver = tf.train.Saver()
@@ -140,7 +134,7 @@ writer.close()
 sess = tf.InteractiveSession()
 saver = tf.train.Saver()
 
-saver = tf.train.import_meta_graph('models/pretrained_lstm.ckpt-83000.meta')
+saver = tf.train.import_meta_graph('models/pretrained_lstm.ckpt-60000.meta')
 saver.restore(sess,tf.train.latest_checkpoint('models'))
 
 # https://stackoverflow.com/questions/33759623/tensorflow-how-to-save-restore-a-model

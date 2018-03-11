@@ -40,7 +40,7 @@ accuracy = tf.reduce_mean(tf.cast(correctPred, tf.float32))
 sess = tf.InteractiveSession()
 saver = tf.train.Saver()
 
-#saver.restore(sess, tf.train.latest_checkpoint('models'))
+
 saver = tf.train.import_meta_graph('models/pretrained_lstm.ckpt-60000.meta')
 saver.restore(sess,tf.train.latest_checkpoint('models'))
 
@@ -65,15 +65,17 @@ def getSentenceMatrix(sentence):
     return sentenceMatrix
 
 
-inputText = "Worst movie of all times. Bad screenplay, pathetic acting"
-#inputText = "Nine minutes of psychedelic, pulsating, often symmetric abstract images, are enough to drive anyone crazy. I did spot a full-frame eye at the start, and later some birds silhouetted against other colors. It was just not my cup of tea. It's about 8 minutes too long."
+inputText = '''Nine minutes of psychedelic, pulsating, often symmetric abstract images,
+are enough to drive anyone crazy. I did spot a full-frame eye at the start,
+and later some birds silhouetted against other colors. It was just not my cup of tea.
+It's about 8 minutes too long.'''
+
 inputMatrix = getSentenceMatrix(inputText)
 
 
 
 predictedSentiment = sess.run(prediction, {input_data: inputMatrix})[0]
-# predictedSentiment[0] represents output score for positive sentiment
-# predictedSentiment[1] represents output score for negative sentiment
+
 
 if (predictedSentiment[0] > predictedSentiment[1]):
     print("Positive Sentiment")
@@ -81,8 +83,14 @@ else:
     print("Negative Sentiment")
 
 
-secondInputText = "Interstellar is the best one I have ever seen. The sotryline is gripping and intense"
-#secondInputText = "My wife, Kate and I absolutely loved the series and can't wait for the next one (hopefully there is a sequel!). I would love to know what the catchy song is called and who wrote it, maybe because I am old and grey and still interested in life:-). If anyone has the full lyrics please send them. Of course one big reason why my wife and I liked this series so much was that we are 75 years old and retired but still very active intellectually. It's great to see a show that highlights the contribution to society that can still be made by older people with special skills and experience. The human interest aspect showing the interactions of the characters and the younger people aroun"
+secondInputText = '''When I was a kid I watched this many times over,
+and I remember whistling the "Happy Cat" song quite often.
+All the songs are great, and actually meorable, unlike many children's musicals,
+where the songs are just stuck in for no real reason. The scenes and costumes are lavish,
+and the acting is very well-done, which isn't surprising, considering the cast.
+I'd recommend this film to children and parents alike, who love magic and fairytales.
+And it actually IS a movie you can watch together, as it won't drive adults up the wall.'''
+
 secondInputMatrix = getSentenceMatrix(secondInputText)
 
 
