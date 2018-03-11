@@ -10,11 +10,11 @@ print ('Loaded the word vectors!')
 import tensorflow as tf
 
 
-maxSeqLength = 750
-numDimensions = 300 #Dimensions for each word vector
+maxSeqLength = 250 #750
+numDimensions = 50 #Dimensions for each word vector
 
 ids = np.load('idsMatrix2.npy')
-
+ids = ids[:,:250]
 
 
 
@@ -27,10 +27,10 @@ def getTrainBatch():
     arr = np.zeros([batchSize, maxSeqLength])
     for i in range(batchSize):
         if (i % 2 == 0):
-            num = randint(1,919)
+            num = randint(1,979)
             labels.append([1,0])
         else:
-            num = randint(1079,1999)
+            num = randint(1019,1999)
             labels.append([0,1])
         arr[i] = ids[num-1:num]
     return arr, labels
@@ -39,7 +39,7 @@ def getTestBatch():
     labels = []
     arr = np.zeros([batchSize, maxSeqLength])
     for i in range(batchSize):
-        num = randint(919,1079)
+        num = randint(979,1019)
         if (num <= 999):
             labels.append([1,0])
         else:
@@ -52,7 +52,7 @@ def getTestBatch():
 
 
 
-batchSize = 24
+batchSize = 2
 lstmUnits = 64
 numClasses = 2
 iterations = 100000
