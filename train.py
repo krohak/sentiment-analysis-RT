@@ -143,7 +143,7 @@ saver = tf.train.Saver()
 #saver.restore(sess, tf.train.latest_checkpoint('models'))
 #saver.restore(sess, save_path)
 
-saver = tf.train.import_meta_graph('models/pretrained_lstm.ckpt-78000.meta')
+saver = tf.train.import_meta_graph('models/pretrained_lstm.ckpt-83000.meta')
 saver.restore(sess,tf.train.latest_checkpoint('models'))
 
 # https://stackoverflow.com/questions/33759623/tensorflow-how-to-save-restore-a-model
