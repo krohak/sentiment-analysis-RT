@@ -1,5 +1,5 @@
 numDimensions = 300
-maxSeqLength = 250
+maxSeqLength = 750
 batchSize = 24
 lstmUnits = 64
 numClasses = 2
@@ -41,7 +41,7 @@ sess = tf.InteractiveSession()
 saver = tf.train.Saver()
 
 #saver.restore(sess, tf.train.latest_checkpoint('models'))
-saver = tf.train.import_meta_graph('models/pretrained_lstm.ckpt-90000.meta')
+saver = tf.train.import_meta_graph('models/pretrained_lstm.ckpt-60000.meta')
 saver.restore(sess,tf.train.latest_checkpoint('models'))
 
 
