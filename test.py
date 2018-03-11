@@ -67,7 +67,7 @@ def getSentenceMatrix(sentence):
 
 
 
-inputText = "That movie was terrible."
+inputText = "That movie was terrible. bad,deplorable,yuck,negative"
 inputMatrix = getSentenceMatrix(inputText)
 
 
@@ -77,9 +77,9 @@ predictedSentiment = sess.run(prediction, {input_data: inputMatrix})[0]
 # predictedSentiment[1] represents output score for negative sentiment
 
 if (predictedSentiment[0] > predictedSentiment[1]):
-    print "Positive Sentiment"
+    print("Positive Sentiment")
 else:
-    print "Negative Sentiment"
+    print("Negative Sentiment")
 
 
 secondInputText = "That movie was the best one I have ever seen."
@@ -89,6 +89,6 @@ secondInputMatrix = getSentenceMatrix(secondInputText)
 
 predictedSentiment = sess.run(prediction, {input_data: secondInputMatrix})[0]
 if (predictedSentiment[0] > predictedSentiment[1]):
-    print "Positive Sentiment"
+    print("Positive Sentiment")
 else:
-    print "Negative Sentiment"
+    print("Negative Sentiment")
