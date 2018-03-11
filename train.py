@@ -139,9 +139,6 @@ writer.close()
 
 sess = tf.InteractiveSession()
 saver = tf.train.Saver()
-#save_path = "models/pretrained_lstm.ckpt"
-#saver.restore(sess, tf.train.latest_checkpoint('models'))
-#saver.restore(sess, save_path)
 
 saver = tf.train.import_meta_graph('models/pretrained_lstm.ckpt-83000.meta')
 saver.restore(sess,tf.train.latest_checkpoint('models'))

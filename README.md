@@ -14,7 +14,7 @@ The dataset contains 1000 positive and 1000 negative movie reviews. The LSTM bas
 - `tar -xvzf data.tar.gz`, which untars the GloVe numpy array and precomputed IDs array
 - `tar -xvzf models.tar.gz`, which untars the model pretrained on a GPU machine
 
-- `python ids.py`, for computing the IDs [optional, in case data.tar.gz is not untared]
+- `python preprocess.py`, for computing the IDs [optional, in case data.tar.gz is not untared]
 - `python train.py` for training on the dataset [option, in case models.tar.gz is not untared]
 - `python test.py` for testing the model
 

@@ -1,14 +1,14 @@
 import numpy as np
+
 # We make use of GloVe, which converts words into vector data,
 # https://nlp.stanford.edu/projects/glove/
 # using the Wikipedia dataset with 50 dimensional embedding.
 # https://www.damienpontifex.com/2017/10/27/using-pre-trained-glove-embeddings-in-tensorflow/
+
 wordsList = np.load('wordsList.npy')
-print('Loaded the word list!')
-wordsList = wordsList.tolist() #Originally loaded as numpy array
-wordsList = [word.decode('UTF-8') for word in wordsList] #Encode words as UTF-8
+wordsList = wordsList.tolist()
+wordsList = [word.decode('UTF-8') for word in wordsList]
 wordVectors = np.load('wordVectors.npy')
-print ('Loaded the word vectors!')
 
 ####################################
 
