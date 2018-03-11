@@ -65,8 +65,8 @@ def getSentenceMatrix(sentence):
     return sentenceMatrix
 
 
-
-inputText = "Nine minutes of psychedelic, pulsating, often symmetric abstract images, are enough to drive anyone crazy. I did spot a full-frame eye at the start, and later some birds silhouetted against other colors. It was just not my cup of tea. It's about 8 minutes too long."
+inputText = "Worst movie of all times. Bad screenplay, pathetic acting"
+#inputText = "Nine minutes of psychedelic, pulsating, often symmetric abstract images, are enough to drive anyone crazy. I did spot a full-frame eye at the start, and later some birds silhouetted against other colors. It was just not my cup of tea. It's about 8 minutes too long."
 inputMatrix = getSentenceMatrix(inputText)
 
 
@@ -81,7 +81,7 @@ else:
     print("Negative Sentiment")
 
 
-secondInputText = "That movie was the best one I have ever seen."
+secondInputText = "Interstellar is the best one I have ever seen. The sotryline is gripping and intense"
 #secondInputText = "My wife, Kate and I absolutely loved the series and can't wait for the next one (hopefully there is a sequel!). I would love to know what the catchy song is called and who wrote it, maybe because I am old and grey and still interested in life:-). If anyone has the full lyrics please send them. Of course one big reason why my wife and I liked this series so much was that we are 75 years old and retired but still very active intellectually. It's great to see a show that highlights the contribution to society that can still be made by older people with special skills and experience. The human interest aspect showing the interactions of the characters and the younger people aroun"
 secondInputMatrix = getSentenceMatrix(secondInputText)
 
